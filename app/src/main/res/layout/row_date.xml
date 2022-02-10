@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ImageView
+        android:id="@+id/sun"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
+        android:src="@drawable/sun"
+
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+      />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="12dp"
+        android:gravity="start|center_vertical"
+        android:layout_marginLeft="40dp"
+        tools:text="date"
+        app:layout_constraintTop_toBottomOf="@id/sun"
+        app:layout_constraintStart_toStartOf="parent"
+
+
+
+        />
+
+    <TextView
+        android:id="@+id/sunrise"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/sunrise"
+
+        android:layout_marginLeft="300dp"
+        app:layout_constraintLeft_toLeftOf="@+id/date"
+
+        />
+
+
+    <TextView
+        android:id="@+id/sunset"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:text="@string/sunset"
+        app:layout_constraintBottom_toBottomOf="@+id/sunrise"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="20dp"
+
+        />
+
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="@+id/date"
+        android:text="@string/temp"
+        android:layout_marginLeft="100dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tempHigh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/temp"
+        android:text="@string/tempH"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="100dp"
+
+        />
+
+    <TextView
+        android:id="@+id/tempLow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="@+id/tempHigh"
+        android:text="@string/tempL"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="160dp"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
