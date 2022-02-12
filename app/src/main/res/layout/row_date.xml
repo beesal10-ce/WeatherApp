@@ -16,45 +16,52 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
       />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="12dp"
+        android:layout_marginStart="40dp"
         android:gravity="start|center_vertical"
-        android:layout_marginLeft="40dp"
-        tools:text="date"
-        app:layout_constraintTop_toBottomOf="@id/sun"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/black"
+
+
+
+        app:layout_constraintEnd_toStartOf="@+id/sun"
+        app:layout_constraintHorizontal_bias="0.0"
+
+
         app:layout_constraintStart_toStartOf="parent"
-
-
-
-        />
+        tools:text="date" />
 
     <TextView
         android:id="@+id/sunrise"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="@string/sunrise"
 
-        android:layout_marginLeft="300dp"
-        app:layout_constraintLeft_toLeftOf="@+id/date"
+        android:textColor="@color/black"
+        android:layout_marginStart="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
 
         />
 
 
     <TextView
         android:id="@+id/sunset"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
+
         android:text="@string/sunset"
-        app:layout_constraintBottom_toBottomOf="@+id/sunrise"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+
+
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
 
         />
 
@@ -63,9 +70,11 @@
         android:id="@+id/temp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="@+id/date"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/date"
+
         android:text="@string/temp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
 
         />
 
@@ -73,10 +82,11 @@
         android:id="@+id/tempHigh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp"
+
         android:text="@string/tempH"
+        android:textColor="@color/black"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
 
         />
 
@@ -84,10 +94,11 @@
         android:id="@+id/tempLow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="@+id/tempHigh"
+
         android:text="@string/tempL"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="160dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="160dp"
 
         />
 
