@@ -1,68 +1,93 @@
 package firstapp.weatherapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import firstapp.weatherapp.ForecastConditions as ForecastConditions
+class ForecastActivity: AppCompatActivity() {
+    private val apiKey ="51048e1180bda3dcbd240c9d9051920e"
 
-class ForecastActivity : AppCompatActivity() {
+    private lateinit var api: Api
+    private lateinit var cityName: TextView
+    private lateinit var forecastTemp: TextView
 
-    private lateinit var recyclerView: RecyclerView
-    val temperature = listOf<ForecastTemp>(
-        ForecastTemp(27F, 18F, 37F),
-        ForecastTemp(35F, 34F, 36F),
-        ForecastTemp(18F, 19F, 20F),
-        ForecastTemp(33F,30F, 20F),
-        ForecastTemp(17F, 20F, 19F),
-        ForecastTemp(11F, 5F, 18F),
-        ForecastTemp(19F,22F,24F),
-        ForecastTemp(33F, 22F,35F),
-        ForecastTemp(19F,22F,27F),
-        ForecastTemp(20F, 18F, 31F),
-        ForecastTemp(13F, 7F,20F),
-        ForecastTemp(17F,11F,24F),
-        ForecastTemp(28F,10F,30F),
-        ForecastTemp(19F,8F,31F),
-        ForecastTemp(33F,30F,36F),
-        ForecastTemp(28F,10F,30F)
-
-
-    )
-     val adapterData = listOf<DayForecast>(
-        DayForecast( 1644452968,1644452968,1571485599,temperature.get(0), 985F,61 ),
-        DayForecast(1644539368,1644539368, 1644449564,temperature.get(1), 1015F, 59),
-        DayForecast(1644625768, 1644625768,1644412964, temperature.get(2), 1005F, 71),
-        DayForecast(1644712168, 1644712168,1644363104, temperature.get(3), 990F, 65),
-        DayForecast(1644798568,1644798568, 1644363104, temperature.get(4), 1115F, 81),
-        DayForecast(1644884968,1644884968, 1571485599, temperature.get(5),1005F, 57),
-        DayForecast(1644971368, 1644971368,1644449564, temperature.get(6),989F, 64),
-        DayForecast(1645057768,1645057768, 1644363104,temperature.get(7), 1005F, 70 ),
-         DayForecast(1645144168,1645144168, 1571485599, temperature.get(8), 1005F, 56),
-        DayForecast(1645230568,1645230568,1644363104,temperature.get(9),990F, 69 ),
-         DayForecast(1645316968,1645316968,1571485599, temperature.get(10), 900F, 57),
-         DayForecast(1645403368,1645403368,1644412964,temperature.get(11),1115F, 56),
-        DayForecast(1645489768,1645489768, 1644363104, temperature.get(12), 1005F, 70),
-        DayForecast(1645576168,1645576168,1644452968, temperature.get(13), 990F, 61),
-        DayForecast(1645662568, 1645662568, 1644449564, temperature.get(14), 1005F,57),
-        DayForecast(1645748968, 1645748968, 1571485599, temperature.get(15), 985F, 64)
-
-
-
-
-
-    )
-
-
+    private lateinit var conditionIcon : ImageView
+    private lateinit var feelsLike: TextView
+    private lateinit var forecastMin:TextView
+    private lateinit var forecastMax: TextView
+    private lateinit var pressure: TextView
+    private lateinit var humidity: TextView
+    private lateinit var Sunrise: TextView
+    private lateinit var Sunset: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast)
 
-        val actionBar = supportActionBar
-        actionBar!!.title ="Forecast Activity"
+        forecastTemp = findViewById(R.id.temperature)
+        conditionIcon = findViewById(R.id.sun)
+        forecastMin = findViewById(R.id.low)
+        forecastMax = findViewById(R.id.high)
+        Sunrise = findViewById(R.id.sunrise)
+        Sunset = findViewById(R.id.sunset)
+        feelsLike = findViewById(R.id.feels_like)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MyAdapter(adapterData)
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http//api.openweathermap.org/data/2.5/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+        api = retrofit.create(api::class.java)
+
     }
-}
+    override fun onResume(){
+        super.onResume()
+
+        val call:Call<ForecastConditions> = api.getForecastConditions("55331")
+        call.enqueue(object : Callback<ForecastConditions>{
+            override fun onResponse(
+                call:Call<ForecastConditions>,
+                response: Response<ForecastConditions>
+            ) {
+                val forecastConditions = response.body()
+                forecastConditions?.let {
+                    bindData(it)
+                }
+            }
+
+            override fun onFailure(call: Call<ForecastConditions>, t:Throwable){
+
+            }
+        })
+
+    }
+
+    private fun bindData(forecastConditions: ForecastConditions) {
+        cityName.text = forecastConditions.name
+        findViewById<TextView>(R.id.temperature).text = forecastTemp.toString()
+        findViewById<TextView>(R.id.low).text = forecastMin.toString()
+        findViewById<TextView>(R.id.high).text = forecastMax.toString()
+
+        findViewById<TextView>(R.id.Pressure).text = pressure.toString()
+        findViewById<TextView>(R.id.humidity).text = humidity.toString()
+
+        val iconName = forecastConditions.weather.firstOrNull()?.icon
+        val iconUrl = "https://openweathermap.org/img/wn/${iconName}@2x.png"
+        Glide.with(this)
+            .load(iconUrl)
+            .into(conditionIcon)
+    }
+
+    }

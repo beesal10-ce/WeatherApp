@@ -1,4 +1,14 @@
 package firstapp.weatherapp
 
-data class DayForecast(val date: Long, val sunrise: Long, val sunset:Long, val temp: ForecastTemp, val pressure:Float, val humidity:Int ) {
-}
+import com.squareup.moshi.Json
+
+
+data class DayForecast (
+    val forecasttemp:Float,
+            @Json(name="feels_like") val feelsLike: Float,
+                    @Json(name="temp_min") val forecastMin: Float,
+                            @Json(name = "temp_max")val forecastMax:Float,
+    val pressure : Float,
+    val humidity: Float,
+
+)
