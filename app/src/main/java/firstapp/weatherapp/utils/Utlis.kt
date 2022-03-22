@@ -8,12 +8,12 @@ fun formatUptoTwoDecimal(value: Double): String {
 }
 
 fun convertMilliTime(milli: Long): String {
-    val date = Date(milli)
+    val date = Date(milli*1000)
     val formatter = SimpleDateFormat("h:mma")
     return formatter.format(date)
 }
 
 fun convertIntoDate(milli: Long): String {
     val formatter = SimpleDateFormat("MMM dd")
-    return formatter.format(milli)
+    return formatter.format(milli*1000)
 }
