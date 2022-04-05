@@ -5,7 +5,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MainDTO(
+data class  MainDTO(
     val feels_like: Double,
     val humidity: Int,
     val pressure: Int,

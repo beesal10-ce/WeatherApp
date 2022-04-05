@@ -30,7 +30,7 @@ class ForecastWeatherAdapter(private val list: List<WeatherDTO>) :
         return MyViewHolder(binding)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onBindViewHolder(holder: ForecastWeatherAdapter.MyViewHolder, position: Int) {
 
         val binding = holder.viewDataBinding

@@ -24,5 +24,12 @@ interface ApiService {
         @Query("appid") appId:String = Constant.APP_ID
     ): Response<ForecastDTO>
 
+    @GET("data/2.5/weather")
+    suspend fun getCurrentWeather(
+        @Query("lat") lat: Double,
+        @Query("lon") long: Double,
+        @Query("appid") appId: String = Constant.APP_ID
+    ): Response<WeatherResponseDTO>
+
 
 }

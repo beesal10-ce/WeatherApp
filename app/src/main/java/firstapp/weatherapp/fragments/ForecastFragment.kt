@@ -44,14 +44,18 @@ class ForecastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setObserver()
-
-        args.weatherResponse?.let {
-            forecastViewModel.getSixteenDays(it.coord.lat , it.coord.lon )
+        if (args.isCurrentLoaction) {
+            forecastViewModel.getSixteenDays(args.lat.toDouble(), args.long.toDouble())
+        } else {
+            args.weatherResponse?.let {
+                forecastViewModel.getSixteenDays(
+                    it.coord.lat,
+                    it.coord.lon
+                )
+            }
         }
 
-
     }
-
     private fun setObserver() {
         forecastViewModel.forecastList.observe(viewLifecycleOwner) {
             it?.let {
