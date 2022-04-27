@@ -1,4 +1,4 @@
-package com.gaur.weatherapp.repository
+package firstapp.weatherapp.repository
 
 import firstapp.weatherapp.model.WeatherResponseDTO
 import firstapp.weatherapp.network.ApiService

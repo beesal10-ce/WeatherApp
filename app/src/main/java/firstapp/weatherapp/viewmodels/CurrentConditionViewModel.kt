@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gaur.weatherapp.repository.CurrentConditionRepo
+import firstapp.weatherapp.repository.CurrentConditionRepo
 import firstapp.weatherapp.model.WeatherResponseDTO
 
 import firstapp.weatherapp.utils.Resource
